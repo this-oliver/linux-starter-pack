@@ -1,4 +1,4 @@
-# Setup Scripts
+# Workstation
 
 Imagine you have a brand new Linux machine or you want to reinstall your OS or you kinda messed up your system, but you want to have your old setup back. This repository offers you the possibility to install and configure developement utilities/tools on a fresh Linux system with a single command.
 
