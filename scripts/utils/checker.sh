@@ -22,17 +22,6 @@ function is_yes {
     fi
 }
 
-# returns true if argument is "Y" or "y" or empty
-function is_yesish {
-    response=$1
-
-    if is_yes $response || [ "$response" = "" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 # returns true if argument is a valid version number
 function check_version {
     version=$1

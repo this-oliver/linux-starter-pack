@@ -2,14 +2,9 @@
 
 mode=$1
 
-curr_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-source $curr_dir/utils/platform.sh
-
 # ======= Constants =======
 
-_TOOL_NAME="basic tools"
-
-ALIAS_BATCAT="alias bat=batcat"
+_TOOL_NAME="podman"
 
 # ======= Functions =======
 
@@ -18,22 +13,23 @@ usage() {
 }
 
 linux_install() {
-
   echo "=========== installing $_TOOL_NAME ==========="
-  sudo apt install -y curl git nmap bat
+  sudo apt update
+  sudo apt install -y podman
 
-  echo "=========== setting $_TOOL_NAME aliases ==========="
-  set_alias "$ALIAS_BATCAT"
+  echo "=========== verifying $_TOOL_NAME installation ==========="
+  sudo podman run hello-world
 
   echo "*=========== $TOOL_NAME installed successfully ==========="
 }
 
 linux_uninstall() {
   echo "=========== uninstalling $_TOOL_NAME ==========="
-  sudo apt purge -y curl git nmap bat
+  sudo apt purge -y podman
 
-  echo "=========== removing $_TOOL_NAME aliases ==========="
-  unset_alias "$ALIAS_BATCAT"
+  echo "========== removing $_TOOL_NAME files ==========="
+  sudo rm -rf /var/lib/containers
+  sudo rm -rf /var/lib/podman
 
   echo "*=========== $TOOL_NAME uninstalled successfully ==========="
 }

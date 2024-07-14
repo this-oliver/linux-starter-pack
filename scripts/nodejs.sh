@@ -2,14 +2,9 @@
 
 mode=$1
 
-curr_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-source $curr_dir/utils/platform.sh
-
 # ======= Constants =======
 
-_TOOL_NAME="basic tools"
-
-ALIAS_BATCAT="alias bat=batcat"
+_TOOL_NAME="nodejs"
 
 # ======= Functions =======
 
@@ -18,22 +13,26 @@ usage() {
 }
 
 linux_install() {
-
   echo "=========== installing $_TOOL_NAME ==========="
-  sudo apt install -y curl git nmap bat
+  # installs nvm (Node Version Manager)
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  # installs nodejs (you may need to restart the terminal)
+  nvm install 20
+  # installs pnpm (Package Nodejs Manager)
+  npm install -g pnpm
 
-  echo "=========== setting $_TOOL_NAME aliases ==========="
-  set_alias "$ALIAS_BATCAT"
+  echo "=========== verifying $_TOOL_NAME installation ==========="
+  node -v
+  npm -v
+  pnpm -v
+  sudo podman run hello-world
 
   echo "*=========== $TOOL_NAME installed successfully ==========="
 }
 
 linux_uninstall() {
-  echo "=========== uninstalling $_TOOL_NAME ==========="
-  sudo apt purge -y curl git nmap bat
-
-  echo "=========== removing $_TOOL_NAME aliases ==========="
-  unset_alias "$ALIAS_BATCAT"
+  echo "========== removing $_TOOL_NAME files ==========="
+  rm -rf $NVM_DIR ~/.npm ~/.bower
 
   echo "*=========== $TOOL_NAME uninstalled successfully ==========="
 }
