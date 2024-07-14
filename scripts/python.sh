@@ -6,8 +6,8 @@ mode=$1
 
 _TOOL_NAME="python"
 
-ALIAS_PYTHON="python=python3"
-ALIAS_PIP="pip=pip3"
+ALIAS_PYTHON="alias python=python3"
+ALIAS_PIP="alias pip=pip3"
 
 # ======= Functions =======
 
@@ -25,8 +25,8 @@ linux_install() {
   sudo apt install -y python3 python3-pip
 
   echo "=========== adding $_TOOL_NAME aliases ==========="
-  echo "$ALIAS_PYTHON" >> ~/.bashrc
-  echo "$ALIAS_PIP" >> ~/.bashrc
+  set_alias "$ALIAS_PYTHON"
+  set_alias "$ALIAS_PIP"
 
   echo "*=========== $TOOL_NAME installed successfully ==========="
 }
@@ -36,8 +36,8 @@ linux_uninstall() {
   sudo apt purge -y python3 python3-pip
 
   echo "========== removing $_TOOL_NAME aliases ==========="
-  sed -i "/$ALIAS_PYTHON/d" ~/.bashrc
-  sed -i "/$ALIAS_PIP/d" ~/.bashrc
+  unset_alias "$ALIAS_PYTHON"
+  unset_alias "$ALIAS_PIP"
 
   echo "*=========== $TOOL_NAME uninstalled successfully ==========="
 }

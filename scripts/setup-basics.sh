@@ -23,8 +23,7 @@ linux_install() {
   sudo apt install -y curl git nmap bat
 
   echo "=========== setting $_TOOL_NAME aliases ==========="
-  echo "$ALIAS_BATCAT" >> ~/.bashrc
-  echo "Don't forget to run 'source ~/.bashrc' to apply changes"
+  set_alias "$ALIAS_BATCAT"
 
   echo "*=========== $TOOL_NAME installed successfully ==========="
 }
@@ -34,8 +33,7 @@ linux_uninstall() {
   sudo apt purge -y curl git nmap bat
 
   echo "=========== removing $_TOOL_NAME aliases ==========="
-  sed -i "/$ALIAS_BATCAT/d" ~/.bashrc
-  echo "Don't forget to run 'source ~/.bashrc' to apply changes"
+  unset_alias "$ALIAS_BATCAT"
 
   echo "*=========== $TOOL_NAME uninstalled successfully ==========="
 }
